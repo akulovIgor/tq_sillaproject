@@ -2,13 +2,12 @@ import random
 import operator
 
 
-def sum_even_numbers(span: int, multiplicity: int) -> int:
-    """Функция вычисляет сумму чисел кратных определённому значению
+def sum_even_numbers_seven_or_six(span: int) -> int:
+    """Функция вычисляет сумму чисел кратных 6 или 7
      и в определённому интервале от 0 до указанного в аргументах
      Аргументы:
-    span -- верхнее ограничение интервала
-    multiplicity -- значение, которому число должно быть кратно"""
-    return sum([i for i in range(span) if i % multiplicity == 0])
+    span -- верхнее ограничение интервала"""
+    return sum([i for i in range(span) if (i % 6 == 0 or i % 7 == 0)])
 
 
 def fibonacci() -> list:
@@ -58,8 +57,7 @@ def swap_elements(array: list, index1: int, index2: int) -> list:
 if __name__ == '__main__':
     print(f'Сумма чисел кратных трём в ряде Фибоначи до 4000000 равна: {sum(fibonacci())}')
 
-    print(f'Сумма натуральных чисел до 1000 кратных 6 равна: {sum_even_numbers(1000, 6)}')
-    print(f'Сумма натуральных чисел до 1000 кратных 7 равна: {sum_even_numbers(1000, 7)}')
+    print(f'Сумма натуральных чисел до 1000 кратных 6 или 7 равна: {sum_even_numbers_seven_or_six(1000)}')
 
     random_list = generates_random_lists(10, 1000)
     print('Список со случайным набором чисел: ')
