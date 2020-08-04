@@ -34,15 +34,15 @@ def generates_random_lists(quantity: int, span: int) -> list:
     return [random.randint(0, span) for i in range(quantity)]
 
 
-def find_element_in_list(array: list, fn) -> int:
+def find_element_in_list(array: list, fn) -> tuple:
     """Ищет в списке минимальный/максимальный элемент и возвращает
-    индекс элемента
+    кортеж с индексом элемента и его значением
     Аргументы:
     array -- список, в котором ищем значение
     fn -- функция, которую необходимо применить для поиска
     Например, min или max."""
-    index, _ = fn(enumerate(array), key=operator.itemgetter(1))
-    return index
+    index, value = fn(enumerate(array), key=operator.itemgetter(1))
+    return index, value
 
 
 def swap_elements(array: list, index1: int, index2: int) -> list:
@@ -63,7 +63,7 @@ if __name__ == '__main__':
     print('Список со случайным набором чисел: ')
     print(random_list)
     random_list = swap_elements(random_list,
-                                find_element_in_list(random_list, max),
-                                find_element_in_list(random_list, min))
+                                find_element_in_list(random_list, max)[0],
+                                find_element_in_list(random_list, min)[0])
     print('Список со случайным набором чисел, после смены местами максимального и минимального значений: ')
     print(random_list)
