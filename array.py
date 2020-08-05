@@ -18,8 +18,14 @@ def input_array(rows: int, columns: int) -> list:
     rows -- количество строк в матрице
     columns -- количество столбцов в матрице"""
     arr = []
-    for i in range(columns):
-        arr.append([int(input()) for _ in range(rows)])
+    i = 0
+    while i < columns:
+        try:
+            arr.append([int(input()) for _ in range(rows)])
+        except ValueError:
+            print("Нужно вводить именно целые числа. Повторите ввод.\n")
+            continue
+        i += 1
     return arr
 
 
@@ -43,28 +49,17 @@ def matrix_output(arr: list):
     [print(arr[i]) for i in range(len(arr))]
 
 
-def reverse_matrix(arr: list) -> list:
-    """Находит максимальное значение в каждом столбце массива
+def find_min_in_column(arr: list) -> list:
+    """Находит минимальное значение в каждом столбце массива
     и возвращает список этих элементов.
     Аргументы:
     arr -- матрица для поиска"""
-    new_arr = []
+    minimum = arr[0]
     for i in range(len(arr)):
-        new_arr.append([])
         for j in range(len(arr[i])):
-            new_arr[i].append(arr[j][i])
-    return new_arr
-
-
-def find_max_in_column(arr: list) -> list:
-    """Находит максимальное значение в каждом столбце массива
-        и возвращает список этих элементов.
-        Аргументы:
-        arr -- матрица для поиска"""
-    maximum = []
-    for i in arr:
-        maximum.append(max(i))
-    return maximum
+            if minimum[j] > arr[i][j]:
+                minimum[j] = arr[i][j]
+    return minimum
 
 
 if __name__ == "__main__":
@@ -81,6 +76,5 @@ if __name__ == "__main__":
     print("Матрица после добавления в конец каждой строки суммы элементов строки: ")
     matrix_output(array)
 
-    array = reverse_matrix(array)
-    print("Результат поиска минимального элемента среди максимальных элементов столбцов матрицы: ")
-    print(min(find_max_in_column(array)))
+    print("Результат поиска максимального элемента среди минимальных элементов столбцов матрицы: ")
+    print(max(find_min_in_column(array)))
